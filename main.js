@@ -73,7 +73,7 @@ async function fetchForm() {
             alert("Something failed");
           } finally {
             console.log('All Tasks are Done');
-            window.location.href = URL_HOME;
+            // window.location.href = URL_HOME;
           }
     })();
 }
