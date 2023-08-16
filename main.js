@@ -9,8 +9,6 @@ let form = document.getElementById('form');
 let isEmailInputValid = false;
 let isUrlInputValid = false;
 
-// console.log(form)
-
 function validateEmailInput() {
     if(emailInput.value !== '' && !emailInput.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
         isInputInvalid(emailError, emailInput, true);
@@ -57,26 +55,10 @@ function isFormValid() {
     }
 }
 
-// async function sendData(e) {
-//     e.preventDefault();
-//     console.log('work');
-//     const xhr = new XMLHttpRequest();
-//     let json = JSON.stringify({
-//         email: emailInput.value,
-//         url: urlInput.value
-//     });
-//     xhr.open("POST", urlInput.value);
-//     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-//     xhr.send(json);
-
-// }
-
-
 
 emailInput.addEventListener('keyup', validateEmailInput);
 urlInput.addEventListener('keyup', validateUrlInput);
 form.addEventListener('blur', isFormValid, true);
-// form.addEventListener('submit', sendData);
 
 async function fetchForm() {
     const response = await fetch(urlInput.nodeValue, {
@@ -86,7 +68,7 @@ async function fetchForm() {
         },
         body: JSON.stringify({a: 1, b: 'Textual content'})
     })
-    .then(console.log(response))
+    .then(console.log('asds'))
 }
 
 form.addEventListener("submit", (e) => {
