@@ -61,19 +61,17 @@ async function fetchForm() {
             let result = await fetch(urlInput.nodeValue, {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
+                  'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     email: emailInput.value,
                     url: urlInput.value
                 })
             })
-            console.log('work');
           } catch(err) {
             alert("Something failed");
           } finally {
-            console.log('All Tasks are Done');
-            // window.location.href = URL_HOME;
+            window.location.href = URL_HOME;
           }
     })();
 }
