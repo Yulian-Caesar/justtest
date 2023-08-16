@@ -39,7 +39,7 @@ function validateUrlInput() {
 }
 
 
-function isInputInvalid(elError, elInput, showError) {
+function isInputInvalid(elInput, showError) {
     if (showError) {
         elInput.setAttribute('data-error', '');
     } else {
@@ -68,13 +68,11 @@ async function fetchForm() {
                     url: urlInput.value
                 })
             })
-            console.log('work')
-          } catch(err) {
+            } catch(err) {
                 console.log("Something failed");
-          } finally {
-                console.log('finally work')
+            } finally {
                 window.location.href = URL_HOME;
-          }
+        }
     })();
 }
 
