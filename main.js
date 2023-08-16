@@ -57,32 +57,19 @@ function isFormValid() {
     }
 }
 
-async function sendData(e) {
-    e.preventDefault();
-    console.log('work');
-    // const xhr = new XMLHttpRequest();
-    // let json = JSON.stringify({
-    //     email: emailInput.value,
-    //     url: urlInput.value
-    // });
-    // xhr.open("POST", urlInput.value);
-    // xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    // xhr.send(json);
+// async function sendData(e) {
+//     e.preventDefault();
+//     console.log('work');
+//     const xhr = new XMLHttpRequest();
+//     let json = JSON.stringify({
+//         email: emailInput.value,
+//         url: urlInput.value
+//     });
+//     xhr.open("POST", urlInput.value);
+//     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+//     xhr.send(json);
 
-    
-
-    // async () => {
-    //     try {
-    //       const result1 = await firstAsynchronousFunction();
-    //       const result2 = await secondAsynchronousFunction(result1);
-    //       console.log(result2);
-    //     } catch(err) {
-    //       throw new Error('Something failed');
-    //     } finally {
-    //       console.log("should be redirected");
-    //     }
-    //   }
-}
+// }
 
 
 
@@ -91,20 +78,16 @@ urlInput.addEventListener('keyup', validateUrlInput);
 form.addEventListener('blur', isFormValid, true);
 // form.addEventListener('submit', sendData);
 
-// form.addEventListener("load", () => sendData(e), false);
 async function fetchForm() {
     const response = await fetch(urlInput.nodeValue, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify({
-            email: emailInput.value,
-            url: urlInput.value
-        })
-    });
-    console.log(response);
-  }
+        body: JSON.stringify({a: 1, b: 'Textual content'})
+    })
+    .then(console.log('its work'))
+}
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -114,18 +97,6 @@ form.addEventListener("submit", (e) => {
     (async function () {
         try {
             let result = await fetchForm();
-
-            // let response = await fetch(urlInput.nodeValue, {
-            //     method: 'POST',
-            //     headers: {
-            //       'Content-Type': 'application/json;charset=utf-8'
-            //     },
-            //     body: JSON.stringify({
-            //         email: emailInput.value,
-            //         url: urlInput.value
-            //     })
-            // });
-            // console.log(response);
             console.log('work')
           } catch(err) {
             alert("Something failed");
@@ -134,11 +105,6 @@ form.addEventListener("submit", (e) => {
             // window.location.href = URL_HOME;
           }
     })();
-
-
-    // let result = await fetch(urlInputValue, 'POST');
-    // console.log(result)
-
   });
 
 
@@ -155,5 +121,3 @@ form.addEventListener("submit", (e) => {
 
 // form onsubmit, при submit виконувати функцію sendData (переробити у fetch (async await)) і потім викликати redicrect
 
-
-// що значить значення true в form.addEventListener('blur', isFormValid, true);
