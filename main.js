@@ -63,14 +63,17 @@ async function fetchForm() {
                 headers: {
                   'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({a: 1, b: 'Textual content'})
+                body: JSON.stringify({
+                    email: emailInput.value,
+                    url: urlInput.value
+                })
             })
-            console.log('work')
+            console.log('work');
           } catch(err) {
             alert("Something failed");
           } finally {
             console.log('All Tasks are Done');
-            // window.location.href = URL_HOME;
+            window.location.href = URL_HOME;
           }
     })();
 }
