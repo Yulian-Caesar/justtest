@@ -55,30 +55,16 @@ function isFormValid() {
     }
 }
 
-
-emailInput.addEventListener('keyup', validateEmailInput);
-urlInput.addEventListener('keyup', validateUrlInput);
-form.addEventListener('blur', isFormValid, true);
-
 async function fetchForm() {
-    const response = await fetch(urlInput.nodeValue, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify({a: 1, b: 'Textual content'})
-    })
-    .then(console.log('asds'))
-}
-
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-  
-    console.log('hello');
-
     (async function () {
         try {
-            let result = await fetchForm();
+            let result = await fetch(urlInput.nodeValue, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({a: 1, b: 'Textual content'})
+            })
             console.log('work')
           } catch(err) {
             alert("Something failed");
@@ -87,19 +73,10 @@ form.addEventListener("submit", (e) => {
             // window.location.href = URL_HOME;
           }
     })();
-  });
+}
 
 
-// Умови:
-// 1) перевірка першого інпута на валідність email
-// 2) перевіряти другий інпут, URL-адреса повинно перевіряти чи введене значення починається з "https://" 
-// 3) перевіряти другий інпут, чи введене значення є дійсною URL-адресою.
-// 4) після того як ввів коректні дані для двох полей вводу, 
-// коли останнє поле вводу втратить focus - кнопка повинна стати доступною для натискання
-// 5) після нажаття кнопки відправлення форми, 
-//  форма має бути відправлена за посиланням із введеної URL-адреси підтвердження. Для надсилання використовуйте метод POST
-// 6)клієнта слід перенаправити на  payproglobal.com.
-
-
-// form onsubmit, при submit виконувати функцію sendData (переробити у fetch (async await)) і потім викликати redicrect
-
+emailInput.addEventListener('keyup', validateEmailInput);
+urlInput.addEventListener('keyup', validateUrlInput);
+form.addEventListener('blur', isFormValid, true);
+submitButton.addEventListener("click", fetchForm);
