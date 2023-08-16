@@ -68,10 +68,12 @@ async function fetchForm() {
                     url: urlInput.value
                 })
             })
+            console.log('work')
           } catch(err) {
-            alert("Something failed");
+                console.log("Something failed");
           } finally {
-            window.location.href = URL_HOME;
+                console.log('finally work')
+                window.location.href = URL_HOME;
           }
     })();
 }
