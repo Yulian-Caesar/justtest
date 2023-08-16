@@ -86,7 +86,7 @@ async function fetchForm() {
         },
         body: JSON.stringify({a: 1, b: 'Textual content'})
     })
-    .then(console.log('its work'))
+    .then(console.log(response))
 }
 
 form.addEventListener("submit", (e) => {
