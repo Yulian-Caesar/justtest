@@ -1,8 +1,6 @@
 const URL_HOME = 'https://payproglobal.com/';
 let emailInput = document.getElementById('email-input');
-let emailError = document.getElementById('email-error');
 let urlInput = document.getElementById('url-input');
-let urlError = document.getElementById('url-error');
 let submitButton = document.getElementById('submit-button');
 let form = document.getElementById('form');
 
@@ -11,29 +9,39 @@ let isUrlInputValid = false;
 
 function validateEmailInput() {
     if(emailInput.value !== '' && !emailInput.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
-        isInputInvalid(emailError, emailInput, true);
+        isInputInvalid(emailInput, true);
         isEmailInputValid = false;
         return false;
     }
-    isInputInvalid(emailError, emailInput, false);
+    isInputInvalid(emailInput, false);
     isEmailInputValid = true;
+    isFormValid();
 }
 
 function validateUrlInput() {
+    if(urlInput.value === '') {
+        isInputInvalid(urlInput, false);
+        isFormValid();
+        return true;
+    }
+
     if(!urlInput.value.startsWith('https://')) {
-        isInputInvalid(urlError, urlInput, true);
+        isInputInvalid(urlInput, true);
         isUrlInputValid = false;
-        return false
+        isFormValid();
+        return false;
     }
     
     try {
         new URL(urlInput.value);
-        isInputInvalid(urlError, urlInput, false);
+        isInputInvalid(urlInput, false);
         isUrlInputValid = true;
+        isFormValid();
         return true;
     } catch (err) {
-        isInputInvalid(urlError, urlInput, true);
+        isInputInvalid(urlInput, true);
         isUrlInputValid = false;
+        isFormValid();
         return false;
     }
 }
@@ -50,8 +58,10 @@ function isInputInvalid(elInput, showError) {
 function isFormValid() {
     if (isEmailInputValid && isUrlInputValid) {
         submitButton.disabled = false;
+        console.log('not disabled');
     } else {
         submitButton.disabled = true;
+        console.log('disabled')
     }
 }
 
@@ -68,16 +78,19 @@ async function fetchForm() {
                     url: urlInput.value
                 })
             })
+            console.log('work');
+            console.log(urlInput.value);
+            console.log(urlInput.nodeValue);
             } catch(err) {
                 console.log("Something failed");
             } finally {
-                window.location.href = URL_HOME;
+                // window.location.href = URL_HOME;
         }
     })();
 }
 
 
-emailInput.addEventListener('keyup', validateEmailInput);
-urlInput.addEventListener('keyup', validateUrlInput);
-form.addEventListener('blur', isFormValid, true);
+emailInput.addEventListener('blur', validateEmailInput);
+urlInput.addEventListener('blur', validateUrlInput);
+// form.addEventListener('blur', isFormValid, true);
 submitButton.addEventListener("click", fetchForm);
